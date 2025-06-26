@@ -27,3 +27,35 @@ const registerUser = async (req, res) => {
     });
   } catch (error) {}
 };
+
+// User login
+const loginUser = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    // Check if user exists
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({
+        message: "User does not exist please register",
+      });
+    }
+
+    // Compare password with hashed one
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({
+        message: "Invalid credentials",
+      });
+    }
+
+    // Generate JWT token
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "1d",
+    });
+    res.status(200).json({
+      message: "User logged in successfully",
+      user,
+      token,
+    });
+  } catch (error) {}
+};
