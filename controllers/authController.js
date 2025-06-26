@@ -57,5 +57,12 @@ const loginUser = async (req, res) => {
       user,
       token,
     });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = {
+  registerUser,
+  loginUser,
 };
