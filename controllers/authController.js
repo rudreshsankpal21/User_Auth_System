@@ -1,6 +1,6 @@
 const express = require("express");
 const User = require("../models/User");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 // User Registration
@@ -62,7 +62,16 @@ const loginUser = async (req, res) => {
   }
 };
 
+// Get all users
+const getUsers = async (req, res) => {
+  const users = await User.find();
+  res.status(200).json({
+    users,
+  });
+};
+
 module.exports = {
   registerUser,
   loginUser,
+  getUsers,
 };

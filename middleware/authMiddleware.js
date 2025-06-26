@@ -2,10 +2,11 @@ const jwt = require("jsonwebtoken");
 
 const authMiddleware = async (req, res, next) => {
   // Check if user is authenticated
-  const token = req.headers.authorization(" ")[1];
+  const token = req.headers;
+
   if (!token) {
     res.status(401).json({
-      message: "Unauthorized",
+      message: "Unauthorized token",
     });
   }
 
@@ -14,7 +15,7 @@ const authMiddleware = async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     if (!decoded) {
       res.status(401).json({
-        message: "Unauthorized",
+        message: "Unauthorized User",
       });
     }
     req.user = decoded;
@@ -26,3 +27,5 @@ const authMiddleware = async (req, res, next) => {
     });
   }
 };
+
+module.exports = authMiddleware;
