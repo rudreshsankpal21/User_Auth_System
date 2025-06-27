@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 
 const authMiddleware = async (req, res, next) => {
   // Check if user is authenticated
-  const token = req.headers;
+  const token = req.headers.authorization?.split(" ")[1];
 
   if (!token) {
     res.status(401).json({
