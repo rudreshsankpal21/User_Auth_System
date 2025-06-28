@@ -5,11 +5,10 @@ const {
   loginUser,
   getUsers,
 } = require("../controllers/authController");
-const authMiddleware = require("../middleware/authMiddleware");
 
 router.post("/register", registerUser);
 
-router.post("/login", authMiddleware, loginUser);
+router.post("/login", loginUser);
 
 router.get("/users", getUsers);
 
