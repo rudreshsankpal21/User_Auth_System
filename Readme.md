@@ -1,47 +1,24 @@
-# 🛡️ User Authentication System
+# 🔐 User Authentication System (JWT + Sessions + isAdmin Middleware)
 
-A simple and secure user authentication backend built with **Node.js**, **Express**, **MongoDB**, and **JWT**. This project includes user registration, login, password hashing, and protected routes using token-based authentication.
-
----
-
-## 🔧 Tech Stack
-
-- **Node.js**
-- **Express**
-- **MongoDB** + Mongoose
-- **JWT (JSON Web Tokens)**
-- **bcryptjs** for password hashing
-- **dotenv** for environment variables
-- **Postman** for testing
+A secure and scalable Node.js backend authentication system using Express, JWT, and MongoDB. Now includes role-based access control using `isAdmin` middleware.
 
 ---
 
-## ✨ Features
-
-- ✅ User Registration with hashed passwords
-- ✅ User Login with JWT token generation
-- ✅ Protected routes using middleware
-- ✅ Clean and modular folder structure
-- ✅ Environment variable configuration with `.env`
-- 🚧 Optional: Token refresh & sessions (to be added later)
-
----
-
-## 🗂️ Project Structure
+## 📁 Folder Structure
 
 ```
 
-auth-system/
-├── controllers/
-│ └── authController.js
-├── middleware/
-│ └── authMiddleware.js
-├── models/
-│ └── User.js
-├── routes/
-│ └── authRoutes.js
 ├── config/
-│ └── db.js
+│ └── db.js # MongoDB connection
+├── controllers/
+│ └── authController.js # Auth logic (register, login, etc.)
+├── middlewares/
+│ ├── authMiddleware.js # JWT Auth Middleware
+│ └── isAdmin.js # Admin-only route protection
+├── models/
+│ └── User.js # User schema
+├── routes/
+│ └── authRoutes.js # Auth route definitions
 ├── .env
 ├── server.js
 └── package.json
@@ -50,64 +27,90 @@ auth-system/
 
 ---
 
-## 📦 Installation & Setup
+## 🔐 Features
 
-1. **Clone the repo:**
-   ```bash
-   git clone https://github.com/yourusername/auth-system.git
-   cd auth-system
-   ```
+- ✅ JWT Authentication
+- ✅ Secure password hashing with bcrypt
+- ✅ Role-based access control (admin/user)
+- ✅ `authMiddleware` for protected routes
+- ✅ `isAdmin` middleware for admin-only access
+- ✅ Clean project structure using MVC pattern
+- ✅ Tested using Postman
 
-````
+---
 
-2. **Install dependencies:**
+## 🧪 API Endpoints
 
+### 📝 Public Routes
+
+| Method | Route              | Description              |
+| ------ | ------------------ | ------------------------ |
+| POST   | /api/auth/register | Register new user        |
+| POST   | /api/auth/login    | Login user (returns JWT) |
+
+---
+
+### 🔒 Protected Routes (JWT Required)
+
+| Method | Route           | Description           | Access          |
+| ------ | --------------- | --------------------- | --------------- |
+| GET    | /api/auth/me    | Get current user      | Logged-in users |
+| GET    | /api/auth/admin | Admin-only route test | Admins only     |
+
+🧠 To test `/api/auth/admin`:
+
+- Login using an admin account
+- Use `Bearer <token>` in `Authorization` header
+
+---
+
+## 🛠️ Tech Stack
+
+- **Node.js** + **Express**
+- **MongoDB** + **Mongoose**
+- **JWT** for authentication
+- **bcrypt** for password hashing
+- **dotenv** for environment configs
+- **Postman** for API testing
+
+---
+
+## ⚙️ Setup Instructions
+
+1. Clone the repo
+2. Install dependencies
    ```bash
    npm install
    ```
 
-3. **Set up your `.env` file:**
+````
+
+3. Create a `.env` file and add:
 
    ```
    PORT=5000
-   MONGO_URI=your_mongodb_uri
-   JWT_SECRET=your_jwt_secret_key
+   MONGO_URI=your_mongo_connection
+   JWT_SECRET=your_secret_key
    ```
 
-4. **Start the server:**
+4. Run the server
 
    ```bash
-   nodemon server.js
+   npm run dev
    ```
 
----
-
-## 🔐 API Endpoints
-
-| Method | Endpoint           | Description            | Protected |
-| ------ | ------------------ | ---------------------- | --------- |
-| POST   | /api/auth/register | Register a new user    | ❌        |
-| POST   | /api/auth/login    | Login and get token    | ✅        |
-| GET    | /api/protected     | Access protected route | ✅        |
-
-Use `Authorization: Bearer <token>` in headers to access protected routes.
-
----
-
-## 🧪 Testing
-
-Use **Postman** to:
-
-- Register a new user
-- Login and get a JWT
-- Access protected route with JWT
+5. Test APIs using **Postman**
 
 ---
 
 ## 👨‍💻 Author
 
-Built with ❤️ by Rudresh
+Built with 💻 and 💪 by Rudresh
+**Backend-focused MERN Developer**
 
 ---
 
+## 🌱 Want to Help?
+
+If this helped you in any way, a ⭐️ star would mean a lot!
 ````
