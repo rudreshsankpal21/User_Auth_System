@@ -110,7 +110,6 @@ Built with 💻 and 💪 by Rudresh
 
 ---
 
-## 🌱 Want to Help?
 
 If this helped you in any way, a ⭐️ star would mean a lot!
 ````
