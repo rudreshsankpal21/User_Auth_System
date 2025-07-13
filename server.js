@@ -11,8 +11,8 @@ app.use(express.json());
 // Routes
 app.use("/api/auth", authRoutes);
 // Connect DB
-connectDB();
-
-app.listen(port, () => {
-  console.log(`http://localhost:${port}`);
+connectDB().then(() => {
+  app.listen(port, () => {
+    console.log(`http://localhost:${port}`);
+  });
 });
